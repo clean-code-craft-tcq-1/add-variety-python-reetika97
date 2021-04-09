@@ -35,7 +35,14 @@ class TypewiseTest(unittest.TestCase):
   def test_MED_ACTIVE_COOLING_as_per_limits_N(self):
     self.assertTrue(typewise_alert.classify_temperature_breach('MED_ACTIVE_COOLING', 36) == 'NORMAL')
     
-
+  #Sends message as per alertTarget
+  def test_sent_to_controller(self):  
+    self.assertTrue(typewise_alert.check_and_alert('TO_CONTROLLER', {'coolingType':'MED_ACTIVE_COOLING'}, 50) == 'Sent_to_controller')
+  def test_sent_to_email(self):  
+    self.assertTrue(typewise_alert.check_and_alert('TO_EMAIL', {'coolingType':'MED_ACTIVE_COOLING'}, 50) == 'Sent_to_email')
+  def test_sent_to_console(self):  
+    self.assertTrue(typewise_alert.check_and_alert('TO_CONSOLE', {'coolingType':'MED_ACTIVE_COOLING'}, 50) == 'Sent_to_console')
+    
 
 if __name__ == '__main__':
   unittest.main()
